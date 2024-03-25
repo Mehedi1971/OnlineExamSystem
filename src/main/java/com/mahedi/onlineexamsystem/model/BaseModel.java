@@ -1,10 +1,13 @@
 package com.mahedi.onlineexamsystem.model;
 
+import com.mahedi.onlineexamsystem.enums.ActiveStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.io.Serializable;
@@ -32,4 +35,17 @@ public class BaseModel implements Serializable {
   @Temporal(TemporalType.TIMESTAMP)
   private Date updateAt;
   private Integer activeStatus;
+
+  @PrePersist
+  public void setPreInsertData(){
+    this.createAt=new Date();
+    if(this.activeStatus==null){
+      this.activeStatus= ActiveStatus.ACTIVE.getValue();
+    }
+  }
+
+  @PreUpdate
+  public void setPreUpdateData(){
+    this.updateAt=new Date();
+  }
 }
