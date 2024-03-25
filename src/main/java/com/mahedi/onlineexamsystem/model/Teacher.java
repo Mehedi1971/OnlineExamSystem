@@ -1,5 +1,15 @@
 package com.mahedi.onlineexamsystem.model;
 
-public class Teacher {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Teacher extends BaseModel{
+
+  private String teacherName;
+  private String teacherEmail;
 
 }
